@@ -14,6 +14,9 @@ from TTS.utils.audio import AudioProcessor
 from TTS.utils.audio.numpy_transforms import compute_energy as calculate_energy
 
 import mutagen
+import hashlib
+
+
 
 # to prevent too many open files error as suggested here
 # https://github.com/pytorch/pytorch/issues/11201#issuecomment-421146936
@@ -38,11 +41,16 @@ def noise_augment_audio(wav):
     return wav + (1.0 / 32768.0) * np.random.rand(*wav.shape)
 
 
+# def string2filename(string):
+#     # generate a safe and reversible filename based on a string
+#     filename = base64.urlsafe_b64encode(string.encode("utf-8")).decode("utf-8", "ignore")
+#     return filename
+
 def string2filename(string):
     # generate a safe and reversible filename based on a string
-    filename = base64.urlsafe_b64encode(string.encode("utf-8")).decode("utf-8", "ignore")
+    hash_object = hashlib.sha256(string.encode("utf-8"))
+    filename = hash_object.hexdigest()
     return filename
-
 
 def get_audio_size(audiopath):
     extension = audiopath.rpartition(".")[-1].lower()
