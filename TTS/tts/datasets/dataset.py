@@ -24,6 +24,7 @@ torch.multiprocessing.set_sharing_strategy("file_system")
 
 
 def _parse_sample(item):
+    print(f'item: {item}')
     language_name = None
     attn_file = None
     if len(item) == 5:
