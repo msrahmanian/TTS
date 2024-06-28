@@ -54,7 +54,7 @@ def string2filename(string):
 
 def get_audio_size(audiopath):
     extension = audiopath.rpartition(".")[-1].lower()
-    print(f'extensionnnnnnnnnnnnnnnnnnnnnnnn: {extension}')
+    print(f'audiopath: {audiopath}')
     if extension not in {"mp3", "wav", "flac"}:
         raise RuntimeError(f"The audio format {extension} is not supported, please convert the audio files to mp3, flac, or wav format!")
 
